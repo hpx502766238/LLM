@@ -1,0 +1,16 @@
+model_name_or_path: ../models/TeleAI/telechat-7B
+adapter_name_or_path: saves/telechat-7B/sftv2
+template: telechat
+finetuning_type: lora
+
+### dataset
+task: cmmlu_test  # choices: [mmlu_test, ceval_validation, cmmlu_test]
+template: fewshot
+lang: zh # choices:[en,zh]
+n_shot: 3
+
+### output
+save_dir: saves/telechat-7B/evalv2
+
+### eval
+batch_size: 32

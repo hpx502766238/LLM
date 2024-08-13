@@ -1,0 +1,41 @@
+### model
+model_name_or_path: ../models/TeleAI/telechat-7B
+#use_telechat: true
+
+### method
+stage: sft
+do_train: true
+finetuning_type: lora
+lora_target: all
+#deepspeed: examples/deepspeed/ds_z2_config.json
+
+### dataset
+dataset: alpaca_zh_demo,alpaca_cmmlu,alpaca_blossom_math_4k
+template: telechat
+cutoff_len: 2048
+# max_samples: 1000
+overwrite_cache: true
+preprocessing_num_workers: 16
+
+### output
+output_dir: saves/telechat-7B/sftv3
+logging_steps: 10
+save_steps: 500
+plot_loss: true
+overwrite_output_dir: true
+
+### train
+per_device_train_batch_size: 8
+gradient_accumulation_steps: 1
+learning_rate: 1.0e-4
+num_train_epochs: 3.0
+lr_scheduler_type: cosine
+warmup_ratio: 0.1
+fp16: true
+ddp_timeout: 180000000
+#resume_from_checkpoint: true
+### eval
+#val_size: 0.1
+#per_device_eval_batch_size: 1
+#eval_strategy: steps
+#eval_steps: 500
